@@ -1,0 +1,23 @@
+//go:generate protoc -I proto/ proto/v1.gokit_with_grpc.proto --go_out=plugins=grpc:v1_gokit_with_grpc/
+
+syntax="proto3";
+package v1.gokit_with_grpc.grpc;
+option go_package = "v1_gokit_with_grpc";
+
+message User {
+   string id = 1;
+}
+
+message CreateUserRequest {
+   string id = 1;
+   string email = 2;
+   string password = 3;
+}
+
+message Response {
+   string message = 1;
+}
+
+service GokitWithGrpcService {
+   rpc CreateUser (CreateUserRequest) returns (Response);
+}
